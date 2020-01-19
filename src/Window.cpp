@@ -6,12 +6,12 @@ void onResize(GLFWwindow* window, int width, int height) {
 
 Window::Window(int width, int height, const char* title) : m_Width(width), m_Height(height) {
 	if (!glfwInit())
-		LOG_ERROR("Failed to initialize GLFW!");
+		std::cout << "Failed to initialize GLFW!" << std::endl;
 
 	m_Window = glfwCreateWindow(width, height, title, NULL, NULL);
 	if (!m_Window) {
 		glfwTerminate();
-		LOG_ERROR("Failed to initialize window!");
+		std::cout << "Failed to initialize window!" << std::endl;
 	}
 
 	glfwSetWindowSizeCallback(m_Window, onResize);
@@ -19,7 +19,7 @@ Window::Window(int width, int height, const char* title) : m_Width(width), m_Hei
 	glfwMakeContextCurrent(m_Window);
 
 	if (glewInit() != GLEW_OK)
-		LOG_ERROR("Failed to initialize GLEW!");
+		std::cout << "Failed to initialize GLEW!" << std::endl;
 
 	glViewport(0, 0, m_Width, m_Height);
 }

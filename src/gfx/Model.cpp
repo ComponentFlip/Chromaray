@@ -1,4 +1,4 @@
-#include "Model.h"
+#include "Model.hpp"
 
 Model::Model(const float* vertices, const unsigned int* indices, unsigned int verticesSize, unsigned int indicesSize) : m_VertexCount(indicesSize/sizeof(unsigned int)) {
 	glGenBuffers(1, &m_VertexBuffer);

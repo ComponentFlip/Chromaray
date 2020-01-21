@@ -1,10 +1,10 @@
-#include "chromaray.h"
+#include "chromaray.hpp"
 
-#include "gfx/Shader.h"
-#include "gfx/Model.h"
+#include "gfx/Shader.hpp"
+#include "gfx/Model.hpp"
 
-#include "Window.h"
-#include "FileLoader.h"
+#include "Window.hpp"
+#include "FileLoader.hpp"
 
 int main() {
 	Window window(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT, Constants::WINDOW_TITLE.c_str());

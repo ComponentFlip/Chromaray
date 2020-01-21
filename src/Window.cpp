@@ -1,4 +1,4 @@
-#include "Window.h"
+#include "Window.hpp"
 
 void onResize(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);

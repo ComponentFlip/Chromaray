@@ -1,4 +1,4 @@
-#include "FileLoader.h"
+#include "FileLoader.hpp"
 
 std::string readFile(std::string path) {
 	std::string result;

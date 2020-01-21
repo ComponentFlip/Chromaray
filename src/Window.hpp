@@ -6,7 +6,7 @@
 #include <iostream>
 #include <string>
 
-#include "chromaray.h"
+#include "chromaray.hpp"
 
 class Window {
 public:

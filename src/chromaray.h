@@ -1,8 +1,12 @@
 #pragma once
 
-#define G_WINDOW_WIDTH 640
-#define G_WINDOW_HEIGHT 480
-#define G_WINDOW_TITLE "Chromaray"
+#include <string>
 
-#define G_SHADER_PATH "res/glsl/"
-#define G_SHADER_ERRORSIZE 1024
+namespace Constants {
+	const unsigned int WINDOW_WIDTH = 640;
+	const unsigned int WINDOW_HEIGHT = 480;
+	const std::string WINDOW_TITLE = "Chromaray";
+
+	const std::string SHADER_PATH = "res/glsl/";
+	const unsigned int SHADER_ERRORSIZE = 1024;
+}

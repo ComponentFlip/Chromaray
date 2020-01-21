@@ -11,12 +11,12 @@ Shader::Shader(std::string vertexSource, std::string fragmentSource) {
 
 	int linked;
 	glGetProgramiv(m_ID, GL_LINK_STATUS, &linked);
-	if (linked == GL_FALSE) {
+	if (!linked) {
 		int length;
-		char message[G_SHADER_ERRORSIZE];
-		glGetProgramInfoLog(m_ID, G_SHADER_ERRORSIZE, &length, message);
+		char message[Constants::SHADER_ERRORSIZE];
 
-		std::cout << "Failed to link program! " << message << std::endl;
+		glGetProgramInfoLog(m_ID, Constants::SHADER_ERRORSIZE, &length, message);
+		std::cout << "Failed to link program! \n" << message << std::endl;
 	}
 }
 
@@ -24,11 +24,11 @@ Shader::~Shader() {
 	glDeleteProgram(m_ID);
 }
 
-void Shader::use() {
+void Shader::use() const {
 	glUseProgram(m_ID);
 }
 
-void Shader::stop() {
+void Shader::stop() const {
 	glUseProgram(0);
 }
 
@@ -41,12 +41,12 @@ unsigned int Shader::createShader(std::string source, unsigned int type) {
 
 	int compiled;
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
-	if (compiled == GL_FALSE) {
+	if (!compiled) {
 		int length;
-		char message[G_SHADER_ERRORSIZE];
-		glGetShaderInfoLog(shader, G_SHADER_ERRORSIZE, &length, message);
+		char message[Constants::SHADER_ERRORSIZE];
 
-		std::cout << "Failed to compile shader! " << message << std::endl;
+		glGetShaderInfoLog(shader, Constants::SHADER_ERRORSIZE, &length, message);
+		std::cout << "Failed to compile shader! \n" << message << std::endl;
 	}
 
 	return shader;

@@ -12,8 +12,8 @@ public:
 	Shader(std::string vertexSource, std::string fragmentSource);
 	~Shader();
 
-	void use();
-	void stop();
+	void use() const;
+	void stop() const;
 private:
 	unsigned int m_ID;
 

@@ -1,15 +1,13 @@
 #include "chromaray.h"
-#include "Window.h"
 
 #include "gfx/Shader.h"
-#include "gfx/VertexBuffer.h"
-#include "gfx/IndexBuffer.h"
-#include "gfx/VertexArray.h"
+#include "gfx/Model.h"
 
+#include "Window.h"
 #include "FileLoader.h"
 
 int main() {
-	Window window(G_WINDOW_WIDTH, G_WINDOW_HEIGHT, G_WINDOW_TITLE);
+	Window window(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT, Constants::WINDOW_TITLE.c_str());
 
 	float positions[] = {
 		-0.5f, -0.5f, 0.0f,
@@ -23,17 +21,15 @@ int main() {
 		2, 3, 0
 	};
 
-	VertexBuffer vBuffer(positions, sizeof(positions));
-	IndexBuffer iBuffer(indices, 6);
-	VertexArray vArray(3, GL_FLOAT, 0);
+	Model model(positions, indices, sizeof(positions), sizeof(indices));
 
-	Shader shader(readFile("res/glsl/basic.vert"), readFile("res/glsl/basic.frag"));
+	Shader shader(readFile(Constants::SHADER_PATH + "basic.vert"), readFile(Constants::SHADER_PATH + "basic.frag"));
 	shader.use();
 
 	while (!window.shouldClose()) {
 		window.clear();
 
-		glDrawElements(GL_TRIANGLES, iBuffer.m_Length, GL_UNSIGNED_INT, nullptr);
+		glDrawElements(GL_TRIANGLES, model.m_VertexCount, GL_UNSIGNED_INT, nullptr);
 
 		window.update();
 	}

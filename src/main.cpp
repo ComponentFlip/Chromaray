@@ -1,3 +1,5 @@
+#include <vector>
+
 #include "chromaray.hpp"
 
 #include "gfx/Shader.hpp"
@@ -9,19 +11,19 @@
 int main() {
 	Window window(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT, Constants::WINDOW_TITLE.c_str());
 
-	float positions[] = {
+	std::vector<float> positions = {
 		-0.5f, -0.5f, 0.0f,
 		 0.5f, -0.5f, 0.0f,
 		 0.5f,  0.5f, 0.0f,
 		-0.5f,  0.5f, 0.0f,
 	};
 
-	unsigned int indices[] = {
+	std::vector<unsigned int> indices = {
 		0, 1, 2,
 		2, 3, 0
 	};
 
-	Model model(positions, indices, sizeof(positions), sizeof(indices));
+	Model model(positions, indices);
 
 	Shader shader(readFile(Constants::SHADER_PATH + "basic.vert"), readFile(Constants::SHADER_PATH + "basic.frag"));
 	shader.use();

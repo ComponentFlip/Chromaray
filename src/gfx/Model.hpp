@@ -1,10 +1,11 @@
 #pragma once
 
 #include <GLEW/glew.h>
+#include <vector>
 
 class Model {
 public:
-	Model(const float* vertices, const unsigned int* indices, unsigned int verticesSize, unsigned int indicesSize);
+	Model(std::vector<float> vertices, std::vector<unsigned int> indices);
 	~Model();
 
 	const unsigned int m_VertexCount;

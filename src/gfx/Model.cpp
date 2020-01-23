@@ -14,9 +14,6 @@ Model::Model(std::vector<float> vertices, std::vector<unsigned int> indices) : m
 
 	glGenVertexArrays(1, &m_VertexArray);
 	glBindVertexArray(0);
-
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 }
 
 Model::~Model() {

@@ -13,15 +13,23 @@ Shader::Shader(std::string vertexSource, std::string fragmentSource) {
 	glGetProgramiv(m_ID, GL_LINK_STATUS, &linked);
 	if (!linked) {
 		int length;
-		char message[Constants::SHADER_ERRORSIZE];
+		char message[Constants::SHADER_ERROR_SIZE];
 
-		glGetProgramInfoLog(m_ID, Constants::SHADER_ERRORSIZE, &length, message);
+		glGetProgramInfoLog(m_ID, Constants::SHADER_ERROR_SIZE, &length, message);
 		std::cout << "Failed to link program! \n" << message << std::endl;
 	}
 }
 
 Shader::~Shader() {
 	glDeleteProgram(m_ID);
+}
+
+void Shader::bindAttribute(unsigned int pointer, const char* name) const {
+	glBindAttribLocation(m_ID, pointer, name);
+}
+
+int Shader::getUniformLocation(const char* name) const {
+	return glGetUniformLocation(m_ID, name);
 }
 
 void Shader::use() const {
@@ -43,9 +51,9 @@ unsigned int Shader::createShader(std::string source, unsigned int type) {
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &compiled);
 	if (!compiled) {
 		int length;
-		char message[Constants::SHADER_ERRORSIZE];
+		char message[Constants::SHADER_ERROR_SIZE];
 
-		glGetShaderInfoLog(shader, Constants::SHADER_ERRORSIZE, &length, message);
+		glGetShaderInfoLog(shader, Constants::SHADER_ERROR_SIZE, &length, message);
 		std::cout << "Failed to compile shader! \n" << message << std::endl;
 	}
 

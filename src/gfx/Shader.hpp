@@ -12,6 +12,9 @@ public:
 	Shader(std::string vertexSource, std::string fragmentSource);
 	~Shader();
 
+	void bindAttribute(unsigned int pointer, const char* name) const;
+	int getUniformLocation(const char* name) const;
+
 	void use() const;
 	void stop() const;
 private:

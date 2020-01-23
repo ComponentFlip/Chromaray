@@ -5,6 +5,8 @@
 #include "gfx/Shader.hpp"
 #include "gfx/Model.hpp"
 
+#include "material/ColourMaterial.hpp"
+
 #include "Window.hpp"
 #include "FileLoader.hpp"
 
@@ -24,9 +26,8 @@ int main() {
 	};
 
 	Model model(positions, indices);
-
-	Shader shader(readFile(Constants::SHADER_PATH + "basic.vert"), readFile(Constants::SHADER_PATH + "basic.frag"));
-	shader.use();
+	ColourMaterial material(0xff577f8e);
+	material.useShader();
 
 	while (!window.shouldClose()) {
 		window.clear();

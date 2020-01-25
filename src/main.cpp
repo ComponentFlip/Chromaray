@@ -40,7 +40,7 @@ int main() {
 	glBindTexture(GL_TEXTURE_2D, texture);
 
 	while (!window.shouldClose()) {
-		window.clear();
+		window.clear(0xffff00ff);
 
 		glDrawElements(GL_TRIANGLES, model.m_VertexCount, GL_UNSIGNED_INT, nullptr);
 

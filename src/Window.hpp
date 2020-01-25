@@ -7,13 +7,14 @@
 #include <string>
 
 #include "chromaray.hpp"
+#include "util/conversions.h"
 
 class Window {
 public:
 	Window(int width, int height, const char* title);
 	~Window();
 
-	void clear();
+	void clear(int clearColour);
 	void update();
 	bool shouldClose();
 private:

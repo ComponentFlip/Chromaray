@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../chromaray.hpp"
+#include "../util/conversions.h"
 
 #include "Material.hpp"
 

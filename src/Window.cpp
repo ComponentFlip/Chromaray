@@ -28,9 +28,11 @@ Window::~Window() {
 	glfwTerminate();
 }
 
-void Window::clear() {
+void Window::clear(int clearColour) {
 	glClear(GL_COLOR_BUFFER_BIT);
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+
+	FloatColour colour = RGBtoFloats(clearColour);
+	glClearColor(colour.r, colour.g, colour.b, colour.a);
 }
 
 void Window::update() {

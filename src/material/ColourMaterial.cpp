@@ -1,8 +1,6 @@
 #include "ColourMaterial.hpp"
 
 ColourMaterial::ColourMaterial(int colour) : Material("colour") {
-	unsigned int vertexLayout;
-
 	glEnableVertexAttribArray(Constants::VERTEXARRAY_POSITION_POINTER);
 	glVertexAttribPointer(Constants::VERTEXARRAY_POSITION_POINTER, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 

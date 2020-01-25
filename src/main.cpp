@@ -5,7 +5,7 @@
 #include "gfx/Shader.hpp"
 #include "gfx/Model.hpp"
 
-#include "material/ColourMaterial.hpp"
+#include "material/TextureMaterial.hpp"
 
 #include "Window.hpp"
 #include "FileLoader.hpp"
@@ -17,7 +17,7 @@ int main() {
 		-0.5f, -0.5f, 0.0f,
 		 0.5f, -0.5f, 0.0f,
 		 0.5f,  0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f,
+		-0.5f,  0.5f, 0.0f
 	};
 
 	std::vector<unsigned int> indices = {
@@ -25,9 +25,19 @@ int main() {
 		2, 3, 0
 	};
 
+	std::vector<int> texCoords = {
+		0, 0,
+		1, 0,
+		1, 1,
+		0, 1
+	};
+
 	Model model(positions, indices);
-	ColourMaterial material(0xff577f8e);
+	TextureMaterial material(texCoords);
 	material.useShader();
+
+	unsigned int texture = loadTexture("res/tex/test.png");
+	glBindTexture(GL_TEXTURE_2D, texture);
 
 	while (!window.shouldClose()) {
 		window.clear();
@@ -36,6 +46,8 @@ int main() {
 
 		window.update();
 	}
+
+	glDeleteTextures(1, &texture);
 
 	return 0;
 }

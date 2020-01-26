@@ -4,7 +4,7 @@
 #include <sstream>
 #include <fstream>
 
-#include <GLEW/glew.h>
+#include <GL/glew.h>
 
 #include "chromaray.hpp"
 #include "../libs/stb_image.h"

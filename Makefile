@@ -7,7 +7,8 @@ LFLAGS=-lGL -lglfw -lGLEW
 SRC=$(shell find . -name \*.cpp)
 OBJ=${SRC:.cpp=.o}
 
-OUT=chromaray
+BIN_DIR=bin/
+OUT=${BIN_DIR}chromaray
 
 all: options build
 
@@ -23,6 +24,7 @@ options:
 	${CC} -c $< ${CFLAGS} -o $@
 
 build: ${OBJ}
+	mkdir ${BIN_DIR} -p
 	${LD} ${OBJ} -o ${OUT} ${LFLAGS}
 
 clean:

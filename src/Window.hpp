@@ -16,6 +16,7 @@ public:
 
 	void clear(int clearColour);
 	void update();
+	// Wrapper around glfwWindowShouldClose
 	bool shouldClose();
 private:
 	GLFWwindow* m_Window;

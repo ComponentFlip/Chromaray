@@ -1,4 +1,4 @@
-#include "conversions.h"
+#include "conversions.hpp"
 
 FloatColour RGBtoFloats(int rgbColour) {
 	// Get the ARGB colour channels out from the colour integer

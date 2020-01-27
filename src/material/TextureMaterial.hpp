@@ -3,17 +3,17 @@
 #include <vector>
 
 #include "../chromaray.hpp"
+#include "../gfx/ArrayBuffer.hpp"
 
 #include "Material.hpp"
 
 class TextureMaterial : public Material {
 public:
 	TextureMaterial(std::vector<int> texCoords);
-	~TextureMaterial();
 
 private:
 	const int m_TexCoordPointer = 1;
-	unsigned int m_TexCoordBuffer;
+	ArrayBuffer m_TexCoordBuffer;
 
 protected:
 	void bindAllAttribs() override;

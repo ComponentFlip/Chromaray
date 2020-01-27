@@ -36,18 +36,21 @@ int main() {
 	TextureMaterial material(texCoords);
 	material.useShader();
 
-	unsigned int texture = loadTexture("res/tex/test.png");
-	glBindTexture(GL_TEXTURE_2D, texture);
+	LoadedImage image = loadTexture("res/tex/test.png");
+	Texture texture(image.pixels, image.width, image.height);
+	texture.bind();
+
+	// Enable alpha blending
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	while (!window.shouldClose()) {
-		window.clear(0xffff00ff);
+		window.clear(0xff4499bb);
 
 		glDrawElements(GL_TRIANGLES, model.m_VertexCount, GL_UNSIGNED_INT, nullptr);
 
 		window.update();
 	}
-
-	glDeleteTextures(1, &texture);
 
 	return 0;
 }

@@ -7,7 +7,7 @@
 #include <string>
 
 #include "chromaray.hpp"
-#include "util/conversions.h"
+#include "util/conversions.hpp"
 
 class Window {
 public:

@@ -35,16 +35,16 @@ void Window::open() {
 	}
 	// Create GLFW window and store it in our class
 	this->m_Window = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(), NULL, NULL);
-	if (!this->m_Window) {
+	if (!m_Window) {
 		glfwTerminate();
 		std::cout << "Failed to initialize window!" << std::endl;
 	}
 
 	// Set callback function for resizing the window
-	glfwSetWindowSizeCallback(this->m_Window, onResize);
+	glfwSetWindowSizeCallback(m_Window, onResize);
 
 	// Set window context current for OpenGL
-	glfwMakeContextCurrent(this->m_Window);
+	glfwMakeContextCurrent(m_Window);
 
 	// Initialize GLEW so we can use modern OpenGL functions
 	if (glewInit() != GLEW_OK)

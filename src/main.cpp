@@ -4,6 +4,7 @@
 
 #include "gfx/Shader.hpp"
 #include "gfx/Model.hpp"
+#include "gfx/Image.hpp"
 
 #include "material/TextureMaterial.hpp"
 
@@ -41,8 +42,8 @@ int main() {
 	TextureMaterial material(texCoords);
 	material.useShader();
 
-	LoadedImage image = loadTexture("res/tex/test.png");
-	Texture texture(image.pixels, image.width, image.height);
+	Image image = Image("res/tex/test.png");
+	Texture texture(image);
 	texture.bind();
 
 	// Enable alpha blending

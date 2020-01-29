@@ -4,13 +4,37 @@ void onResize(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
-Window::Window(int width, int height, const char* title) : m_Width(width), m_Height(height) {
+Window::Window(int width, int height, const char* title)
+:
+	m_Width(width)
+	, m_Height(height)
+	, m_glVersion({0, 0})
+	, m_Title(title)
+{
 	// Initialize GLFW
 	if (!glfwInit())
 		std::cout << "Failed to initialize GLFW!" << std::endl;
+}
 
+Window::~Window() {
+	// Terminate GLFW window after we're finished
+	glfwTerminate();
+}
+
+void Window::set_gl_version(unsigned major, unsigned minor) {
+	m_glVersion[0] = major;
+	m_glVersion[1] = minor;
+}
+
+void Window::open() {
+	// Set OpenGL version
+	if (m_glVersion[0] != 0) {
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, m_glVersion[0]);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, m_glVersion[1]);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	}
 	// Create GLFW window and store it in our class
-	this->m_Window = glfwCreateWindow(width, height, title, NULL, NULL);
+	this->m_Window = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(), NULL, NULL);
 	if (!this->m_Window) {
 		glfwTerminate();
 		std::cout << "Failed to initialize window!" << std::endl;
@@ -28,11 +52,6 @@ Window::Window(int width, int height, const char* title) : m_Width(width), m_Hei
 
 	// Initialize OpenGL viewport
 	glViewport(0, 0, m_Width, m_Height);
-}
-
-Window::~Window() {
-	// Terminate GLFW window after we're finished
-	glfwTerminate();
 }
 
 void Window::clear(int clearColour) {

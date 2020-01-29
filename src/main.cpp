@@ -43,7 +43,7 @@ int main() {
 	material.useShader();
 
 	Image image = Image("res/tex/test.png");
-	Texture texture(image.getPixels(), image.getWidth(), image.getHeight());
+	Texture texture(image);
 	texture.bind();
 
 	// Enable alpha blending

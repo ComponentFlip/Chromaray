@@ -2,9 +2,12 @@
 
 #include <GL/glew.h>
 
+// Forward declaration
+class Image;
+
 class Texture {
 public:
-	Texture(const unsigned char* pixels, unsigned width, unsigned height);
+	Texture(const Image& image);
 	~Texture();
 
 	void bind();

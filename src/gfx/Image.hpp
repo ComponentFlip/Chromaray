@@ -9,10 +9,10 @@ public:
 private:
     void loadImage(const std::string& fileBuffer);
 public:
-    unsigned char* getPixels() { return m_Image; }
-    int getWidth() { return m_Width; }
-    int getHeight() { return m_Height; }
-    int getBitDepth() { return m_BitDepth; }
+    unsigned char* getPixels() const { return m_Image; }
+    int getWidth() const { return m_Width; }
+    int getHeight() const { return m_Height; }
+    int getBitDepth() const { return m_BitDepth; }
 private:
     unsigned char* m_Image;
     int m_Width;

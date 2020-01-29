@@ -13,5 +13,5 @@ public:
 	void bind();
 	void unbind();
 private:
-	unsigned int m_ID;
+	unsigned m_ID;
 };

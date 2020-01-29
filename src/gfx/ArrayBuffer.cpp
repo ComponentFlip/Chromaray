@@ -1,6 +1,6 @@
 #include "ArrayBuffer.hpp"
 
-ArrayBuffer::ArrayBuffer(const void* data, unsigned int dataSize) {
+ArrayBuffer::ArrayBuffer(const void* data, unsigned dataSize) {
 	glGenBuffers(1, &m_ID);
 	bind();
 	glBufferData(GL_ARRAY_BUFFER, dataSize, data, GL_STATIC_DRAW);

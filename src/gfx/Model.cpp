@@ -1,6 +1,6 @@
 #include "Model.hpp"
 
-Model::Model(std::vector<float> vertices, std::vector<unsigned int> indices)
+Model::Model(std::vector<float> vertices, std::vector<unsigned> indices)
 	: m_VertexCount(indices.size()), 
 	m_VertexBuffer(vertices.data(), vertices.size() * sizeof(float)), 
 	m_IndexBuffer(indices.data(), indices.size()),

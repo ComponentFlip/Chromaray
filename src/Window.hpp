@@ -28,5 +28,5 @@ private:
 	std::string m_Title;
 	GLFWwindow* m_Window;
 	int m_Width, m_Height;
-	unsigned int m_glVersion[2];
+	unsigned m_glVersion[2];
 };

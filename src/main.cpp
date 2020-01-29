@@ -26,7 +26,7 @@ int main() {
 		-0.5f,  0.5f, 0.0f
 	};
 
-	std::vector<unsigned int> indices = {
+	std::vector<unsigned> indices = {
 		0, 1, 2,
 		2, 3, 0
 	};

@@ -4,7 +4,7 @@
 
 class VertexArray {
 public:
-	VertexArray(unsigned int index, unsigned int elements, unsigned int type);
+	VertexArray(unsigned index, unsigned elements, unsigned type);
 	~VertexArray();
 
 	void bind();

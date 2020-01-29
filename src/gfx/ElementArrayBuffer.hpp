@@ -4,7 +4,7 @@
 
 class ElementArrayBuffer {
 public:
-	ElementArrayBuffer(const unsigned int* data, unsigned int length);
+	ElementArrayBuffer(const unsigned* data, unsigned length);
 	~ElementArrayBuffer();
 
 	void bind();

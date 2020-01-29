@@ -4,11 +4,11 @@
 
 class ElementArrayBuffer {
 public:
-	ElementArrayBuffer(const unsigned int* data, unsigned int length);
+	ElementArrayBuffer(const unsigned* data, unsigned length);
 	~ElementArrayBuffer();
 
 	void bind();
 	void unbind();
 private:
-	unsigned int m_ID;
+	unsigned m_ID;
 };

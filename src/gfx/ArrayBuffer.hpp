@@ -4,11 +4,11 @@
 
 class ArrayBuffer {
 public:
-	ArrayBuffer(const void* data, unsigned int dataSize);
+	ArrayBuffer(const void* data, unsigned dataSize);
 	~ArrayBuffer();
 
 	void bind();
 	void unbind();
 private:
-	unsigned int m_ID;
+	unsigned m_ID;
 };

@@ -1,6 +1,6 @@
 #include "VertexArray.hpp"
 
-VertexArray::VertexArray(unsigned int index, unsigned int elements, unsigned int type) : m_Index(index) {
+VertexArray::VertexArray(unsigned index, unsigned elements, unsigned type) : m_Index(index) {
 	glGenVertexArrays(1, &m_ID);
 	glBindVertexArray(m_ID);
 

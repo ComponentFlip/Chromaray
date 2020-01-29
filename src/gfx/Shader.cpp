@@ -1,8 +1,8 @@
 #include "Shader.hpp"
 
 Shader::Shader(std::string vertexSource, std::string fragmentSource) {
-	unsigned int vertexShader = createShader(vertexSource, GL_VERTEX_SHADER);
-	unsigned int fragmentShader = createShader(fragmentSource, GL_FRAGMENT_SHADER);
+	unsigned vertexShader = createShader(vertexSource, GL_VERTEX_SHADER);
+	unsigned fragmentShader = createShader(fragmentSource, GL_FRAGMENT_SHADER);
 
 	m_ID = glCreateProgram();
 	glAttachShader(m_ID, vertexShader);
@@ -24,7 +24,7 @@ Shader::~Shader() {
 	glDeleteProgram(m_ID);
 }
 
-void Shader::bindAttribute(unsigned int pointer, const char* name) const {
+void Shader::bindAttribute(unsigned pointer, const char* name) const {
 	glBindAttribLocation(m_ID, pointer, name);
 }
 
@@ -40,8 +40,8 @@ void Shader::stop() const {
 	glUseProgram(0);
 }
 
-unsigned int Shader::createShader(std::string source, unsigned int type) {
-	unsigned int shader = glCreateShader(type);
+unsigned Shader::createShader(std::string source, unsigned type) {
+	unsigned shader = glCreateShader(type);
 	const char* cstrSource = source.c_str();
 
 	glShaderSource(shader, 1, &cstrSource, NULL);

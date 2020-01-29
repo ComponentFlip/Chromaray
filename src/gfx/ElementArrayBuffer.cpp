@@ -1,9 +1,9 @@
 #include "ElementArrayBuffer.hpp"
 
-ElementArrayBuffer::ElementArrayBuffer(const unsigned int* data, unsigned int length) {
+ElementArrayBuffer::ElementArrayBuffer(const unsigned* data, unsigned length) {
 	glGenBuffers(1, &m_ID);
 	bind();
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, length * sizeof(unsigned int), data, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, length * sizeof(unsigned), data, GL_STATIC_DRAW);
 }
 
 ElementArrayBuffer::~ElementArrayBuffer() {

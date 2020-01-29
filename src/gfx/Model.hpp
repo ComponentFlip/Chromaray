@@ -10,9 +10,13 @@
 
 class Model {
 public:
-	Model(std::vector<float> vertices, std::vector<unsigned int> indices);
+	Model(std::vector<float> vertices, std::vector<unsigned> indices);
 
-	const unsigned int m_VertexCount;
+	void bind();
+	void unbind();
+	void draw();
+
+	const unsigned m_VertexCount;
 private:
 	ArrayBuffer m_VertexBuffer;
 	ElementArrayBuffer m_IndexBuffer;

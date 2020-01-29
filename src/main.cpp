@@ -4,6 +4,7 @@
 
 #include "gfx/Shader.hpp"
 #include "gfx/Model.hpp"
+#include "gfx/Image.hpp"
 
 #include "material/TextureMaterial.hpp"
 
@@ -11,7 +12,12 @@
 #include "FileLoader.hpp"
 
 int main() {
-	Window window(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT, Constants::WINDOW_TITLE.c_str());
+	Window window(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT, Constants::WINDOW_TITLE);
+	window.setGLVersion(3, 2);
+	window.open();
+
+	std::cout << "Using GLFW " << glfwGetVersionString() << std::endl;
+	std::cout << "Using OpenGL " << glGetString(GL_VERSION) << std::endl;
 
 	std::vector<float> positions = {
 		-0.5f, -0.5f, 0.0f,
@@ -20,7 +26,7 @@ int main() {
 		-0.5f,  0.5f, 0.0f
 	};
 
-	std::vector<unsigned int> indices = {
+	std::vector<unsigned> indices = {
 		0, 1, 2,
 		2, 3, 0
 	};
@@ -36,8 +42,8 @@ int main() {
 	TextureMaterial material(texCoords);
 	material.useShader();
 
-	LoadedImage image = loadTexture("res/tex/test.png");
-	Texture texture(image.pixels, image.width, image.height);
+	Image image = Image("res/tex/test.png");
+	Texture texture(image);
 	texture.bind();
 
 	// Enable alpha blending
@@ -47,7 +53,7 @@ int main() {
 	while (!window.shouldClose()) {
 		window.clear(0xff4499bb);
 
-		glDrawElements(GL_TRIANGLES, model.m_VertexCount, GL_UNSIGNED_INT, nullptr);
+		model.draw();
 
 		window.update();
 	}

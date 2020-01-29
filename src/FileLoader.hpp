@@ -10,8 +10,7 @@
 
 struct LoadedImage {
 	unsigned char* pixels;
-	unsigned int width, height;
+	unsigned width, height;
 };
 
 std::string readFile(std::string path);
-LoadedImage loadTexture(std::string path);

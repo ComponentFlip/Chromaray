@@ -10,15 +10,6 @@
 #include "Window.hpp"
 #include "FileLoader.hpp"
 
-#define GLCALL(x) x; get_gl_errors(__LINE__);
-
-void get_gl_errors(int line) {
-		GLenum error;
-		while ((error = glGetError()) != GL_NO_ERROR) {
-			std::cout << "OPENGL ERROR (&line " << std::dec << line << "): " << std::hex << error << std::endl;
-		}
-}
-
 int main() {
 	Window window(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT, Constants::WINDOW_TITLE.c_str());
 	window.set_gl_version(3, 2);
@@ -46,30 +37,25 @@ int main() {
 		0, 1
 	};
 
-	// By default, the OpenGL CORE profile does not
-	// construct a default Vertex Array. We have to
-	// create our own here and bind it.
-	unsigned int vao;
-	GLCALL(glCreateVertexArrays(1, &vao));
-	GLCALL(glBindVertexArray(vao));
-
 	Model model(positions, indices);
 	TextureMaterial material(texCoords);
 	material.useShader();
 
-	unsigned int texture = loadTexture("res/tex/test.png");
-	glBindTexture(GL_TEXTURE_2D, texture);
+	LoadedImage image = loadTexture("res/tex/test.png");
+	Texture texture(image.pixels, image.width, image.height);
+	texture.bind();
+
+	// Enable alpha blending
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	while (!window.shouldClose()) {
-		window.clear(0xffff00ff);
+		window.clear(0xff4499bb);
 
-		GLCALL(glBindVertexArray(vao));
 		model.draw();
 
 		window.update();
 	}
-
-	glDeleteTextures(1, &texture);
 
 	return 0;
 }

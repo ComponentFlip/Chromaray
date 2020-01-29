@@ -1,18 +1,23 @@
 #pragma once
 
-#include <GL/glew.h>
 #include <vector>
+
+#include "../chromaray.hpp"
+
+#include "ArrayBuffer.hpp"
+#include "ElementArrayBuffer.hpp"
+#include "VertexArray.hpp"
 
 class Model {
 public:
 	Model(std::vector<float> vertices, std::vector<unsigned int> indices);
-	~Model();
 
 	void bind();
 	void draw();
 
 	const unsigned int m_VertexCount;
 private:
-	unsigned int m_VertexBuffer;
-	unsigned int m_IndexBuffer;
+	ArrayBuffer m_VertexBuffer;
+	ElementArrayBuffer m_IndexBuffer;
+	VertexArray m_VertexArray;
 };

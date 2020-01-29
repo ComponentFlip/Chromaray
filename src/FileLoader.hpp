@@ -4,10 +4,14 @@
 #include <sstream>
 #include <fstream>
 
-#include <GL/glew.h>
-
 #include "chromaray.hpp"
 #include "../libs/stb_image.h"
+#include "gfx/Texture.hpp"
+
+struct LoadedImage {
+	unsigned char* pixels;
+	unsigned int width, height;
+};
 
 std::string readFile(std::string path);
-unsigned int loadTexture(std::string path);
+LoadedImage loadTexture(std::string path);

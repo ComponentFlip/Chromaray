@@ -1,21 +1,12 @@
 #include "Model.hpp"
 
-Model::Model(std::vector<float> vertices, std::vector<unsigned int> indices) : m_VertexCount(indices.size()) {
-	float* vertexData = &vertices[0];
-	unsigned int* indexData = &indices[0];
-
-	glGenBuffers(1, &m_VertexBuffer);
-	glGenBuffers(1, &m_IndexBuffer);
-
+Model::Model(std::vector<float> vertices, std::vector<unsigned int> indices)
+	: m_VertexCount(indices.size()), 
+	m_VertexBuffer(vertices.data(), vertices.size() * sizeof(float)), 
+	m_IndexBuffer(indices.data(), indices.size()),
+	m_VertexArray(Constants::VERTEXARRAY_POSITION_POINTER, 3, GL_FLOAT)
+{
 	bind();
-
-	glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(float), vertexData, GL_STATIC_DRAW);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size()*sizeof(unsigned int), indexData, GL_STATIC_DRAW);
-}
-
-Model::~Model() {
-	glDeleteBuffers(1, &m_VertexBuffer);
-	glDeleteBuffers(1, &m_IndexBuffer);
 }
 
 void Model::draw() {
@@ -24,6 +15,7 @@ void Model::draw() {
 }
 
 void Model::bind() {
-	glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
+	m_VertexBuffer.bind();
+	m_IndexBuffer.bind();
+	m_VertexArray.bind();
 }

@@ -12,10 +12,17 @@ Model::Model(std::vector<float> vertices, std::vector<unsigned int> indices)
 void Model::draw() {
 	bind();
 	glDrawElements(GL_TRIANGLES, m_VertexCount, GL_UNSIGNED_INT, nullptr);
+	unbind();
 }
 
 void Model::bind() {
 	m_VertexBuffer.bind();
 	m_IndexBuffer.bind();
 	m_VertexArray.bind();
+}
+
+void Model::unbind() {
+	m_VertexBuffer.unbind();
+	m_IndexBuffer.unbind();
+	m_VertexArray.unbind();
 }

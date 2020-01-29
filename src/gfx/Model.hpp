@@ -13,6 +13,7 @@ public:
 	Model(std::vector<float> vertices, std::vector<unsigned int> indices);
 
 	void bind();
+	void unbind();
 	void draw();
 
 	const unsigned int m_VertexCount;

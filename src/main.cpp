@@ -11,8 +11,8 @@
 #include "FileLoader.hpp"
 
 int main() {
-	Window window(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT, Constants::WINDOW_TITLE.c_str());
-	window.set_gl_version(3, 2);
+	Window window(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT, Constants::WINDOW_TITLE);
+	window.setGLVersion(3, 2);
 	window.open();
 
 	std::cout << "Using GLFW " << glfwGetVersionString() << std::endl;

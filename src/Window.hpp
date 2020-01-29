@@ -11,10 +11,10 @@
 
 class Window {
 public:
-	Window(int width, int height, const char* title);
+	Window(int width, int height, std::string title);
 	~Window();
 
-	void set_gl_version(unsigned major, unsigned minor);
+	void setGLVersion(unsigned major, unsigned minor);
 
 	// Window is not opened by default;
 	// This function will construct the window with the parameters
@@ -22,7 +22,7 @@ public:
 
 	void clear(int clearColour);
 	void update();
-	// Wrapper around glfwWindowShouldClose
+	
 	bool shouldClose();
 private:
 	std::string m_Title;

@@ -40,8 +40,8 @@ void Shader::stop() const {
 	glUseProgram(0);
 }
 
-unsigned int Shader::createShader(std::string source, unsigned type) {
-	unsigned int shader = glCreateShader(type);
+unsigned Shader::createShader(std::string source, unsigned type) {
+	unsigned shader = glCreateShader(type);
 	const char* cstrSource = source.c_str();
 
 	glShaderSource(shader, 1, &cstrSource, NULL);

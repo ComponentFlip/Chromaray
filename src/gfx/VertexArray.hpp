@@ -10,6 +10,6 @@ public:
 	void bind();
 	void unbind();
 private:
-	unsigned int m_ID;
-	unsigned int m_Index;
+	unsigned m_ID;
+	unsigned m_Index;
 };

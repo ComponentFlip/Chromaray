@@ -20,5 +20,5 @@ public:
 private:
 	unsigned m_ID;
 
-	unsigned createShader(std::string source, unsigned int type);
+	unsigned createShader(std::string source, unsigned type);
 };

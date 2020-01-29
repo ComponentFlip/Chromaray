@@ -14,4 +14,3 @@ struct LoadedImage {
 };
 
 std::string readFile(std::string path);
-LoadedImage loadTexture(std::string path);

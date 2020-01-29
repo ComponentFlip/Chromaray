@@ -1,6 +1,6 @@
 #include "Texture.hpp"
 
-Texture::Texture(const unsigned char* pixels, unsigned int width, unsigned int height) {
+Texture::Texture(const unsigned char* pixels, unsigned width, unsigned height) {
 	glGenTextures(1, &m_ID);
 	bind();
 

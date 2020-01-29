@@ -4,7 +4,7 @@
 
 class Texture {
 public:
-	Texture(const unsigned char* pixels, unsigned int width, unsigned int height);
+	Texture(const unsigned char* pixels, unsigned width, unsigned height);
 	~Texture();
 
 	void bind();

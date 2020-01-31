@@ -1,5 +1,7 @@
 #include "Model.hpp"
 
+#include "../chromaray.hpp"
+
 Model::Model(std::vector<float> vertices, std::vector<unsigned> indices)
 	: m_VertexCount(indices.size()), 
 	m_VertexBuffer(vertices.data(), vertices.size() * sizeof(float)), 
@@ -11,7 +13,7 @@ Model::Model(std::vector<float> vertices, std::vector<unsigned> indices)
 
 void Model::draw() {
 	bind();
-	glDrawElements(GL_TRIANGLES, m_VertexCount, GL_UNSIGNED_INT, nullptr);
+	GLCALL(glDrawElements(GL_TRIANGLES, m_VertexCount, GL_UNSIGNED_INT, nullptr));
 	unbind();
 }
 

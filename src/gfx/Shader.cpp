@@ -29,11 +29,11 @@ void Shader::bindAttribute(unsigned pointer, const char* name) const {
 }
 
 unsigned Shader::getUniformLocation(const char* name) const {
-	return glGetUniformLocation(m_ID, name);
+	return GLCALL(glGetUniformLocation(m_ID, name));
 }
 
 void Shader::setMatrixUniform(Matrix4f matrix, const char* locationName) const {
-	glUniformMatrix4fv(getUniformLocation(locationName), 4 * 4, false, matrix.data[0]);
+	GLCALL(glUniformMatrix4fv(getUniformLocation(locationName), 1, false, (const float*)&matrix.data));
 }
 
 void Shader::use() const {

@@ -6,6 +6,7 @@
 #include <string>
 
 #include "../chromaray.hpp"
+#include "../util/Matrix4f.hpp"
 
 class Shader {
 public:
@@ -13,7 +14,9 @@ public:
 	~Shader();
 
 	void bindAttribute(unsigned pointer, const char* name) const;
-	int getUniformLocation(const char* name) const;
+	unsigned getUniformLocation(const char* name) const;
+
+	void setMatrixUniform(Matrix4f matrix, const char* locationName) const;
 
 	void use() const;
 	void stop() const;

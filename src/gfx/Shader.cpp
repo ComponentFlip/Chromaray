@@ -28,8 +28,12 @@ void Shader::bindAttribute(unsigned pointer, const char* name) const {
 	glBindAttribLocation(m_ID, pointer, name);
 }
 
-int Shader::getUniformLocation(const char* name) const {
-	return glGetUniformLocation(m_ID, name);
+unsigned Shader::getUniformLocation(const char* name) const {
+	return GLCALL(glGetUniformLocation(m_ID, name));
+}
+
+void Shader::setMatrixUniform(Matrix4f matrix, const char* locationName) const {
+	GLCALL(glUniformMatrix4fv(getUniformLocation(locationName), 1, false, (const float*)&matrix.data));
 }
 
 void Shader::use() const {

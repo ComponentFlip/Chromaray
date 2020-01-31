@@ -5,6 +5,7 @@
 #include "gfx/Shader.hpp"
 #include "gfx/Model.hpp"
 #include "gfx/Image.hpp"
+#include "Scene.hpp"
 
 #include "material/TextureMaterial.hpp"
 
@@ -20,10 +21,10 @@ int main() {
 	std::cout << "Using OpenGL " << glGetString(GL_VERSION) << std::endl;
 
 	std::vector<float> positions = {
-		-0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.5f,  0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f
+		-0.5f, -0.5f, -2.0f,
+		 0.5f, -0.5f, -2.0f,
+		 0.5f,  0.5f, -2.0f,
+		-0.5f,  0.5f, -2.0f
 	};
 
 	std::vector<unsigned> indices = {
@@ -40,7 +41,9 @@ int main() {
 
 	Model model(positions, indices);
 	TextureMaterial material(texCoords);
-	material.useShader();
+	material.m_Shader.use();
+
+	Scene scene(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT, material.m_Shader);
 
 	Image image = Image("res/tex/test.png");
 	Texture texture(image);

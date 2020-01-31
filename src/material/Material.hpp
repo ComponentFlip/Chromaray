@@ -4,13 +4,13 @@
 
 #include "../FileLoader.hpp"
 #include "../gfx/Shader.hpp"
+#include "../util/Matrix4f.hpp"
 
 class Material {
 public:
 	Material(std::string name);
-
-	void useShader() const;
+	
+	const Shader m_Shader;
 protected:
-	Shader m_Shader;
 	virtual void bindAllAttribs() = 0; 
 };

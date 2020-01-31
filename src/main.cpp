@@ -60,8 +60,8 @@ int main() {
 	while (!window.shouldClose()) {
 		float t = clock.getElapsed();
 
-		scene.m_Camera.setPosition(0, 0, sin(t) - 2);
-		model.m_Transformation.setRotation(0, (int)(t * 128) % 360, 0);
+		scene.m_Camera.setPosition(0, 0, sinf(t * 2.f) - 2.f);
+		model.m_Transformation.setRotation(0, t * 128.f, 0);
 
 		window.clear(0xff4499bb);
 

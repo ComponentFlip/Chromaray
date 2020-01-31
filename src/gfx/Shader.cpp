@@ -32,8 +32,8 @@ unsigned Shader::getUniformLocation(const char* name) const {
 	return GLCALL(glGetUniformLocation(m_ID, name));
 }
 
-void Shader::setMatrixUniform(Matrix4f matrix, const char* locationName) const {
-	GLCALL(glUniformMatrix4fv(getUniformLocation(locationName), 1, false, (const float*)&matrix.data));
+void Shader::setMatrixUniform(glm::mat4 matrix, const char* locationName) const {
+	GLCALL(glUniformMatrix4fv(getUniformLocation(locationName), 1, false, (const float*)&matrix[0][0]));
 }
 
 void Shader::use() const {

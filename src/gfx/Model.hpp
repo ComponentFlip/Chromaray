@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <glm/glm.hpp>
 
 #include "../chromaray.hpp"
 
@@ -17,6 +18,8 @@ public:
 	void draw();
 
 	const unsigned m_VertexCount;
+	
+	Transformation m_Transformation;
 private:
 	ArrayBuffer m_VertexBuffer;
 	ElementArrayBuffer m_IndexBuffer;

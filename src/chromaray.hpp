@@ -1,8 +1,10 @@
 #pragma once
 
+#include <GL/glew.h>
+#include <glm/glm.hpp>
+
 #include <string>
 #include <iostream>
-#include <GL/glew.h>
 
 // GL error debugging
 #define GLCALL(x) x; clearGLerror(__FILE__, __LINE__)
@@ -23,6 +25,19 @@ namespace Constants {
 	const float SCENE_NEARPLANE = 0.001f;
 	const float SCENE_FARPLANE = 100.0f;
 }
+
+struct Transformation {
+	Transformation()
+		: position(glm::vec3(0, 0, 0))
+		, rotation(glm::vec3(0, 0, 0))
+		, scale(glm::vec3(1, 1, 1)) {}
+
+	void setPosition(float x, float y, float z) { position = glm::vec3(x, y, z); }
+	void setRotation(float x, float y, float z) { rotation = glm::vec3(x, y, z); }
+	void setScale(float x, float y, float z) { scale = glm::vec3(x, y, z); }
+
+	glm::vec3 position, rotation, scale;
+};
 
 static const char* convertGLerrorToString(const GLenum error) {
 	switch (error) {

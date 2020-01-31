@@ -1,4 +1,5 @@
 #include <vector>
+#include <chrono>
 
 #include "chromaray.hpp"
 
@@ -21,10 +22,10 @@ int main() {
 	std::cout << "Using OpenGL " << glGetString(GL_VERSION) << std::endl;
 
 	std::vector<float> positions = {
-		-0.5f, -0.5f, -2.0f,
-		 0.5f, -0.5f, -2.0f,
-		 0.5f,  0.5f, -2.0f,
-		-0.5f,  0.5f, -2.0f
+		-0.5f, -0.5f, 0.0f,
+		 0.5f, -0.5f, 0.0f,
+		 0.5f,  0.5f, 0.0f,
+		-0.5f,  0.5f, 0.0f
 	};
 
 	std::vector<unsigned> indices = {
@@ -53,8 +54,18 @@ int main() {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	auto lastTime = std::chrono::high_resolution_clock::now();
+
 	while (!window.shouldClose()) {
+		auto now = std::chrono::high_resolution_clock::now();
+		float delta = std::chrono::duration_cast<std::chrono::duration<float>>(now - lastTime).count();
+
+		scene.m_Camera.setPosition(0, 0, sin(delta) - 2);
+		model.m_Transformation.setRotation(0, (int)(delta * 128) % 360, 0);
+
 		window.clear(0xff4499bb);
+
+		material.m_Shader.setMatrixUniform(getTransformationMatrix(model.m_Transformation), "u_tMatrix");
 
 		scene.update(window.getWidth(), window.getHeight());
 		model.draw();

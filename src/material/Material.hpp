@@ -4,7 +4,6 @@
 
 #include "../FileLoader.hpp"
 #include "../gfx/Shader.hpp"
-#include "../util/Matrix4f.hpp"
 
 class Material {
 public:

@@ -2,11 +2,12 @@
 
 #include <GL/glew.h>
 
+#include <glm/glm.hpp>
+
 #include <iostream>
 #include <string>
 
 #include "../chromaray.hpp"
-#include "../util/Matrix4f.hpp"
 
 class Shader {
 public:
@@ -16,7 +17,7 @@ public:
 	void bindAttribute(unsigned pointer, const char* name) const;
 	unsigned getUniformLocation(const char* name) const;
 
-	void setMatrixUniform(Matrix4f matrix, const char* locationName) const;
+	void setMatrixUniform(glm::mat4 matrix, const char* locationName) const;
 
 	void use() const;
 	void stop() const;

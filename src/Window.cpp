@@ -62,6 +62,16 @@ void Window::update() {
 	// Swap window back buffer & front buffer
 	glfwSwapBuffers(m_Window);
 	glfwPollEvents();
+
+	glfwGetWindowSize(m_Window, &m_Width, &m_Height);
+}
+
+int Window::getWidth() const {
+	return m_Width;
+}
+
+int Window::getHeight() const {
+	return m_Height;
 }
 
 bool Window::shouldClose() {

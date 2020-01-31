@@ -56,6 +56,7 @@ int main() {
 	while (!window.shouldClose()) {
 		window.clear(0xff4499bb);
 
+		scene.update(window.getWidth(), window.getHeight());
 		model.draw();
 
 		window.update();

@@ -23,6 +23,9 @@ public:
 	void clear(int clearColour);
 	void update();
 	
+	int getWidth() const;
+	int getHeight() const;
+
 	bool shouldClose();
 private:
 	std::string m_Title;

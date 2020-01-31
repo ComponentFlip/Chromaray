@@ -28,7 +28,7 @@ void Shader::bindAttribute(unsigned pointer, const char* name) const {
 	glBindAttribLocation(m_ID, pointer, name);
 }
 
-unsigned Shader::getUniformLocation(const char* name) const {
+int Shader::getUniformLocation(const char* name) const {
 	return GLCALL(glGetUniformLocation(m_ID, name));
 }
 

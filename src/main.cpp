@@ -3,6 +3,8 @@
 
 #include "chromaray.hpp"
 
+#include "util/Clock.hpp"
+
 #include "gfx/Shader.hpp"
 #include "gfx/Model.hpp"
 #include "gfx/Image.hpp"
@@ -54,14 +56,12 @@ int main() {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	auto lastTime = std::chrono::high_resolution_clock::now();
-
+	Clock clock;
 	while (!window.shouldClose()) {
-		auto now = std::chrono::high_resolution_clock::now();
-		float delta = std::chrono::duration_cast<std::chrono::duration<float>>(now - lastTime).count();
+		float t = clock.getElapsed();
 
-		scene.m_Camera.setPosition(0, 0, sin(delta) - 2);
-		model.m_Transformation.setRotation(0, (int)(delta * 128) % 360, 0);
+		scene.m_Camera.setPosition(0, 0, sinf(t * 2.f) - 2.f);
+		model.m_Transformation.setRotation(0, t * 128.f, 0);
 
 		window.clear(0xff4499bb);
 

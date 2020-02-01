@@ -13,7 +13,7 @@ Window::Window(int width, int height, std::string title) : m_Width(width), m_Hei
 
 	// Initialize GLFW
 	if (!glfwInit())
-		std::cout << "Failed to initialize GLFW!" << std::endl;
+		LOG_ERROR("Failed to initialize GLFW!");
 }
 
 Window::~Window() {
@@ -37,7 +37,7 @@ void Window::open() {
 	m_Window = glfwCreateWindow(m_Width, m_Height, m_Title.c_str(), NULL, NULL);
 	if (!m_Window) {
 		glfwTerminate();
-		std::cout << "Failed to initialize window!" << std::endl;
+		LOG_ERROR("Failed to initialize window!");
 	}
 
 	glfwSetWindowSizeCallback(m_Window, onResize);
@@ -45,7 +45,10 @@ void Window::open() {
 
 	// Initialize GLEW so we can use modern OpenGL functions
 	if (glewInit() != GLEW_OK)
-		std::cout << "Failed to initialize GLEW!" << std::endl;
+		LOG_ERROR("Failed to initialize GLEW!");
+
+	LOG_INFO("Using GLFW " << glfwGetVersionString());
+	LOG_INFO("Using OpenGL " << glGetString(GL_VERSION));
 
 	glViewport(0, 0, m_Width, m_Height);
 }

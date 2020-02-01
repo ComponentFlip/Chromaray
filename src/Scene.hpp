@@ -3,14 +3,15 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "gfx/Shader.hpp"
 #include "util/conversions.hpp"
 
 class Scene {
 public:
-	Scene(const int width, const int height, const Shader& shader);
+	Scene(const int width, const int height);
 
 	void update(const int width, const int height);
+
+	glm::mat4 getProjectionMatrix() const;
 
 	Transformation m_Camera;
 private:
@@ -20,5 +21,4 @@ private:
 	float m_FarPlane;
 
 	glm::mat4 m_ProjectionMatrix;
-	const Shader& m_Shader;
 };

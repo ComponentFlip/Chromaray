@@ -5,19 +5,19 @@
 
 #include "../chromaray.hpp"
 
-#include "ArrayBuffer.hpp"
-#include "ElementArrayBuffer.hpp"
-#include "VertexArray.hpp"
+#include "gl/ArrayBuffer.hpp"
+#include "gl/ElementArrayBuffer.hpp"
+#include "gl/VertexArray.hpp"
 
 class Model {
 public:
 	Model(std::vector<float> vertices, std::vector<unsigned> indices);
 
-	void bind();
-	void unbind();
-	void draw();
+	void bindAll();
+	void unbindAll();
 
 	const unsigned m_VertexCount;
+	const unsigned m_AttributePosition;
 	
 	Transformation m_Transformation;
 private:

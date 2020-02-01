@@ -11,6 +11,9 @@
 static const char* convertGLerrorToString(const GLenum error);
 static void clearGLerror(const char* file, int line);
 
+#define LOG_INFO(x) std::cout << x << std::endl
+#define LOG_ERROR(x) std::cerr << x << std::endl
+
 namespace Constants {
 	const int WINDOW_WIDTH = 640;
 	const int WINDOW_HEIGHT = 480;

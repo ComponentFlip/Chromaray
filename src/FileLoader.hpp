@@ -6,7 +6,6 @@
 
 #include "chromaray.hpp"
 #include "../libs/stb_image.h"
-#include "gfx/Texture.hpp"
 
 struct LoadedImage {
 	unsigned char* pixels;

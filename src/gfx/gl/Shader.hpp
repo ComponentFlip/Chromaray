@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 
-#include "../chromaray.hpp"
+#include "../../chromaray.hpp"
 
 class Shader {
 public:

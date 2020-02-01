@@ -1,6 +1,6 @@
 #include "Texture.hpp"
 
-#include "Image.hpp"
+#include "../Image.hpp"
 
 Texture::Texture(const Image& image) {
 	glGenTextures(1, &m_ID);
@@ -21,10 +21,10 @@ Texture::~Texture() {
 	glDeleteTextures(1, &m_ID);
 }
 
-void Texture::bind() {
+void Texture::bind() const {
 	glBindTexture(GL_TEXTURE_2D, m_ID);
 }
 
-void Texture::unbind() {
+void Texture::unbind() const {
 	glBindTexture(GL_TEXTURE_2D, 0);
 }

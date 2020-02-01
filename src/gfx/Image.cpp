@@ -5,6 +5,7 @@
 #include <sstream>
 
 #include "../../libs/stb_image.h"
+#include "../chromaray.hpp"
 
 Image::Image(const std::string& path)
 :
@@ -21,6 +22,6 @@ void Image::loadImage(const std::string& path) {
     stbi_set_flip_vertically_on_load(true);
     m_Image = stbi_load(path.c_str(), &m_Width, &m_Height, &m_BitDepth, STBI_rgb_alpha);
     if (!m_Image) {
-        std::cerr << "ERROR: Image failed to load! [" << stbi_failure_reason() << "]" << std::endl;
+        LOG_ERROR("Failed to load image! Reason: " << stbi_failure_reason());
     }
 }

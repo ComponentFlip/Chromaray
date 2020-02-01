@@ -7,23 +7,17 @@ Model::Model(std::vector<float> vertices, std::vector<unsigned> indices)
 	, m_VertexBuffer(vertices.data(), vertices.size() * sizeof(float))
 	, m_IndexBuffer(indices.data(), indices.size())
 	, m_VertexArray(Constants::VERTEXARRAY_POSITION_POINTER, 3, GL_FLOAT)
-{
-	bind();
-}
+	, m_AttributePosition(0)
+{}
 
-void Model::draw() {
-	bind();
-	GLCALL(glDrawElements(GL_TRIANGLES, m_VertexCount, GL_UNSIGNED_INT, nullptr));
-	unbind();
-}
 
-void Model::bind() {
+void Model::bindAll() {
 	m_VertexBuffer.bind();
 	m_IndexBuffer.bind();
 	m_VertexArray.bind();
 }
 
-void Model::unbind() {
+void Model::unbindAll() {
 	m_VertexBuffer.unbind();
 	m_IndexBuffer.unbind();
 	m_VertexArray.unbind();

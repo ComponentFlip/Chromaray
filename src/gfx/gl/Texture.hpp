@@ -10,8 +10,8 @@ public:
 	Texture(const Image& image);
 	~Texture();
 
-	void bind();
-	void unbind();
+	void bind() const;
+	void unbind() const;
 private:
 	unsigned m_ID;
 };

@@ -16,7 +16,7 @@ Shader::Shader(std::string vertexSource, std::string fragmentSource) {
 		char message[Constants::SHADER_ERROR_SIZE];
 
 		glGetProgramInfoLog(m_ID, Constants::SHADER_ERROR_SIZE, &length, message);
-		std::cout << "Failed to link program! \n" << message << std::endl;
+		LOG_ERROR("Failed to link program! \n" << message);
 	}
 }
 
@@ -58,7 +58,7 @@ unsigned Shader::createShader(std::string source, unsigned type) {
 		char message[Constants::SHADER_ERROR_SIZE];
 
 		glGetShaderInfoLog(shader, Constants::SHADER_ERROR_SIZE, &length, message);
-		std::cout << "Failed to compile shader! \n" << message << std::endl;
+		LOG_ERROR("Failed to compile shader! \n" << message);
 	}
 
 	return shader;

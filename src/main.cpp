@@ -16,6 +16,28 @@
 #include "Window.hpp"
 #include "FileLoader.hpp"
 
+void updatePosition(Window& window, Transformation& camera) {
+	if (window.isDown(GLFW_KEY_LEFT)) camera.rotate(0, -Constants::PLAYER_TURNSPEED, 0);
+	if (window.isDown(GLFW_KEY_RIGHT)) camera.rotate(0, Constants::PLAYER_TURNSPEED, 0);
+
+	if (window.isDown(GLFW_KEY_W)) {
+		camera.position.x += sinf(glm::radians(camera.rotation.y)) * Constants::PLAYER_MOVESPEED;
+		camera.position.z -= cosf(glm::radians(camera.rotation.y)) * Constants::PLAYER_MOVESPEED;
+	}
+	if (window.isDown(GLFW_KEY_S)) {
+		camera.position.x -= sinf(glm::radians(camera.rotation.y)) * Constants::PLAYER_MOVESPEED;
+		camera.position.z += cosf(glm::radians(camera.rotation.y)) * Constants::PLAYER_MOVESPEED;
+	}
+	if (window.isDown(GLFW_KEY_A)) {
+		camera.position.x -= sinf(glm::radians(camera.rotation.y + 90)) * Constants::PLAYER_MOVESPEED;
+		camera.position.z += cosf(glm::radians(camera.rotation.y + 90)) * Constants::PLAYER_MOVESPEED;
+	}
+	if (window.isDown(GLFW_KEY_D)) {
+		camera.position.x -= sinf(glm::radians(camera.rotation.y - 90)) * Constants::PLAYER_MOVESPEED;
+		camera.position.z += cosf(glm::radians(camera.rotation.y - 90)) * Constants::PLAYER_MOVESPEED;
+	}
+}
+
 int main() {
 	Window window(Constants::WINDOW_WIDTH, Constants::WINDOW_HEIGHT, Constants::WINDOW_TITLE);
 	window.setGLVersion(3, 2);
@@ -49,13 +71,14 @@ int main() {
 	Scene scene(window.getWidth(), window.getHeight());
 
 	Renderer renderer(&scene);
-	
+
+	model.m_Transformation.setPosition(0, 0, -1.5f);
+
 	Clock clock;
 	while (!window.shouldClose()) {
 		float t = clock.getElapsed();
 
-		scene.m_Camera.setPosition(0, 0, sinf(t * 2.f) - 2.f);
-		model.m_Transformation.setRotation(0, t * 128.f, 0);
+		updatePosition(window, scene.m_Camera);
 
 		window.clear(0xff4499bb);
 

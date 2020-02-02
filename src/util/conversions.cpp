@@ -28,3 +28,14 @@ glm::mat4 getTransformationMatrix(Transformation source) {
 
 	return matrix;
 }
+
+glm::mat4 getViewMatrix(Transformation source) {
+	glm::mat4 matrix = glm::mat4(1.0f);
+
+	matrix = glm::rotate(matrix, glm::radians(source.rotation.x), glm::vec3(1, 0, 0));
+	matrix = glm::rotate(matrix, glm::radians(source.rotation.y), glm::vec3(0, 1, 0));
+	matrix = glm::rotate(matrix, glm::radians(source.rotation.z), glm::vec3(0, 0, 1));
+	matrix = glm::translate(matrix, glm::vec3(-source.position));
+
+	return matrix;
+}

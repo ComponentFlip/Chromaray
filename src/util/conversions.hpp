@@ -15,3 +15,4 @@ struct FloatColour {
 FloatColour RGBtoFloats(int rgbColour);
 
 glm::mat4 getTransformationMatrix(Transformation source);
+glm::mat4 getViewMatrix(Transformation source);

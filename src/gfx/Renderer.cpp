@@ -13,7 +13,7 @@ void Renderer::render(Model& model, Material& material) {
 	material.bindAttribute(model.m_AttributePosition, "a_pos");
 
 	material.bindUniform(getTransformationMatrix(model.m_Transformation), "u_tMatrix");
-	material.bindUniform(getTransformationMatrix(m_Scene->m_Camera), "u_vMatrix");
+	material.bindUniform(getViewMatrix(m_Scene->m_Camera), "u_vMatrix");
 	material.bindUniform(m_Scene->getProjectionMatrix(), "u_pMatrix");
 
 	GLCALL(glDrawElements(GL_TRIANGLES, model.m_VertexCount, GL_UNSIGNED_INT, nullptr));

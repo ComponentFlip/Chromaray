@@ -27,6 +27,9 @@ namespace Constants {
 	const float SCENE_FOV = 75.0f;
 	const float SCENE_NEARPLANE = 0.001f;
 	const float SCENE_FARPLANE = 100.0f;
+
+	const float PLAYER_MOVESPEED = 0.04f;
+	const float PLAYER_TURNSPEED = 2.f;
 }
 
 struct Transformation {
@@ -38,6 +41,10 @@ struct Transformation {
 	void setPosition(float x, float y, float z) { position = glm::vec3(x, y, z); }
 	void setRotation(float x, float y, float z) { rotation = glm::vec3(x, y, z); }
 	void setScale(float x, float y, float z) { scale = glm::vec3(x, y, z); }
+
+	void move(float x, float y, float z) { position = glm::vec3(position.x+x, position.y+y, position.z+z); }
+	void rotate(float x, float y, float z) { rotation = glm::vec3(rotation.x + x, rotation.y + y, rotation.z + z); }
+	void resize(float x, float y, float z) { scale = glm::vec3(scale.x + x, scale.y + y, scale.z + z); }
 
 	glm::vec3 position, rotation, scale;
 };

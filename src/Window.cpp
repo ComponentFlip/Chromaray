@@ -53,6 +53,10 @@ void Window::open() {
 	glViewport(0, 0, m_Width, m_Height);
 }
 
+bool Window::isDown(int keyCode) {
+	return glfwGetKey(m_Window, keyCode);
+}
+
 void Window::clear(int clearColour) {
 	// Indicate which buffers to clear
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

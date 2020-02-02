@@ -1,5 +1,9 @@
 # Chromaray
 
+## Controls
+ - WASD to move around
+ - Arrow keys to look around
+
 ## Libraries
 
 - GLFW 3.3.1

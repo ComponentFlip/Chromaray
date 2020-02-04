@@ -15,8 +15,8 @@ static void clearGLerror(const char* file, int line);
 #define LOG_ERROR(x) std::cerr << x << std::endl
 
 namespace Constants {
-	const int WINDOW_WIDTH = 640;
-	const int WINDOW_HEIGHT = 480;
+	const int WINDOW_WIDTH = 1024;
+	const int WINDOW_HEIGHT = 768;
 	const std::string WINDOW_TITLE = "Chromaray";
 
 	const std::string SHADER_PATH = "res/glsl/";

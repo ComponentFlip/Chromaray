@@ -4,6 +4,8 @@ Renderer::Renderer(Scene* scene) : m_Scene(scene) {
 	// Enable alpha blending
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+	glEnable(GL_DEPTH_TEST);
 }
 
 void Renderer::render(Model& model, Material& material) {

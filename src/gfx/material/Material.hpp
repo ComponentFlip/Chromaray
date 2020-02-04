@@ -13,6 +13,7 @@ public:
 	void bindUniform(glm::mat4 matrix, std::string name) const;
 
 	virtual void prepare() const;
+	void stop() const;
 protected:
 	Shader m_Shader;
 };

@@ -16,3 +16,7 @@ void Material::bindUniform(glm::mat4 matrix, std::string name) const {
 void Material::prepare() const {
 	m_Shader.use();
 }
+
+void Material::stop() const {
+	m_Shader.stop();
+}

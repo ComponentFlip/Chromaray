@@ -7,6 +7,7 @@
 
 #include "gfx/Model.hpp"
 #include "gfx/Image.hpp"
+#include "gfx/TextureAtlas.hpp"
 #include "gfx/Renderer.hpp"
 #include "gfx/gl/Texture.hpp"
 #include "Scene.hpp"
@@ -55,14 +56,15 @@ int main() {
 		2, 3, 0
 	};
 
-	std::vector<int> texCoords = {
+	std::vector<float> texCoords = {
 		0, 0,
 		1, 0,
 		1, 1,
 		0, 1
 	};
 
-	Image image = Image("res/tex/test.png");
+	Image image = Image("res/tex/tiles.png");
+	TextureAtlas ta(image, 16);
 	Texture texture(image);
 
 	Model model(positions, indices);
@@ -71,8 +73,8 @@ int main() {
 	Scene scene(window.getWidth(), window.getHeight());
 
 	Renderer renderer(&scene);
-
-	model.m_Transformation.setPosition(0, 0, -1.5f);
+	
+	material.setData(ta.getTexCoords(texCoords, 0, 15));
 
 	Clock clock;
 	while (!window.shouldClose()) {
@@ -83,6 +85,15 @@ int main() {
 		window.clear(0xff4499bb);
 
 		scene.update(window.getWidth(), window.getHeight());
+
+		// Move the model to different positions before rendering it again
+		model.m_Transformation.setPosition(0, 0, -1.5f);
+		renderer.render(model, material);
+
+		model.m_Transformation.setPosition(-2.f, 0, -1.5f);
+		renderer.render(model, material);
+
+		model.m_Transformation.setPosition(2.f, 0, -1.5f);
 		renderer.render(model, material);
 
 		window.update();

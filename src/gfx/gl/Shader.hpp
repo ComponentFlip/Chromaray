@@ -15,6 +15,7 @@ public:
 	~Shader();
 
 	void bindAttribute(unsigned pointer, const char* name) const;
+	int getAttribLocation(const char* name) const;
 	int getUniformLocation(const char* name) const;
 
 	void setMatrixUniform(glm::mat4 matrix, const char* locationName) const;

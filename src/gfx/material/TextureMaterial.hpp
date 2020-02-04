@@ -10,11 +10,13 @@
 
 class TextureMaterial : public Material {
 public:
-	TextureMaterial(std::vector<int> texCoords, Texture& texture);
+	TextureMaterial(std::vector<float> texCoords, Texture& texture);
+
+	void setData(std::vector<float> texCoords);
 
 	void prepare() const override;
 private:
-	const int m_TexCoordPointer = 1;
+	const int m_TexCoordPointer;
 	ArrayBuffer m_TexCoordBuffer;
 	Texture& m_Texture;
 };

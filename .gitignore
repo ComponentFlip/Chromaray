@@ -1,6 +1,8 @@
 /.vscode
+/bin
+/libs
+
 *.vcxproj
 *.vcxproj.filters
 *.vcxproj.user
 *.o
-/bin

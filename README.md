@@ -1,8 +1,8 @@
 # Chromaray
 
-## Controls
- - WASD to move around
- - Arrow keys to look around
+## About 
+
+Chromaray is a WIP first person shooter game. The engine is currently very early in development, so there are no features at the moment.
 
 ## Libraries
 

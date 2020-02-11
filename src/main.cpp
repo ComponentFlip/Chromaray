@@ -1,41 +1,34 @@
 #include <gl/glew.h>
 
 #include <iostream>
+#include <vector>
+
+#include "../libs/stb_image.h"
+#include "Chromaray.hpp"
 
 #include "Window.hpp"
 #include "FileReader.hpp"
 #include "gfx/Shader.hpp"
+#include "gfx/Model.hpp"
 
 int main() {
-	Window window(640, 480, "Chromaray");
+	Window window(ChConstants::WINDOW_WIDTH, ChConstants::WINDOW_HEIGHT, ChConstants::WINDOW_TITLE);
+	ChGraphics::Model model;
 
-	float vertices[] = {
-		-0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.5f,  0.5f, 0.0f,
-		-0.5f,  0.5f, 0.0f 
+	model.vertices = {
+		// POSITIONS         RGB COLOURS      TEX COORDS
+		-0.5f, -0.5f, 0.f,   1.f, 0.f, 0.f,   0.f, 0.f,
+		 0.5f, -0.5f, 0.f,   0.f, 1.f, 0.f,   1.f, 0.f,
+		 0.5f,  0.5f, 0.f,   0.f, 0.f, 1.f,   1.f, 1.f,
+		-0.5f,  0.5f, 0.f,   1.f, 0.f, 1.f,   0.f, 1.f
 	};
 
-	unsigned indices[] = {
+	model.indices = {
 		0, 1, 2,
 		2, 3, 0 
 	};
-
-	unsigned vertexBuffer;
-	glGenBuffers(1, &vertexBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(float), vertices, GL_STATIC_DRAW);
-
-	unsigned indexBuffer;
-	glGenBuffers(1, &indexBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned), indices, GL_STATIC_DRAW);
-
-	unsigned vertexArray;
-	glGenVertexArrays(1, &vertexArray);
-
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, nullptr);
+	
+	ChGraphics::storeModel(&model);
 
 	int shader = ChGraphics::createShaderProgram(
 		ChIO::readTextFile("res/glsl/shader.vert").c_str(), 
@@ -53,9 +46,7 @@ int main() {
 		window.update();
 	}
 
-	glDeleteBuffers(1, &vertexBuffer);
-	glDeleteBuffers(1, &indexBuffer);
-	glDeleteVertexArrays(1, &vertexArray);
+	ChGraphics::deleteModel(&model);
 	glDeleteProgram(shader);
 
 	return 0;

@@ -1,5 +1,7 @@
 #version 330 core
 
+in vec3 v_col;
+
 void main() {
-	gl_FragColor = vec4(0.1f, 0.9f, 0.5f, 1.0f);
+	gl_FragColor = vec4(v_col, 1.0f);
 }

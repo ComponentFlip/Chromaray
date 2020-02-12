@@ -1,19 +1,20 @@
-#include <gl/glew.h>
+#include <GL/glew.h>
 
 #include <iostream>
 #include <vector>
 
-#include "../libs/stb_image.h"
 #include "Chromaray.hpp"
 
 #include "Window.hpp"
 #include "FileReader.hpp"
 #include "gfx/Shader.hpp"
 #include "gfx/Model.hpp"
+#include "gfx/Texture.hpp"
 
 int main() {
 	Window window(ChConstants::WINDOW_WIDTH, ChConstants::WINDOW_HEIGHT, ChConstants::WINDOW_TITLE);
 	ChGraphics::Model model;
+	ChIO::Image image("res/tex/test.png");
 
 	model.vertices = {
 		// POSITIONS         RGB COLOURS      TEX COORDS
@@ -35,6 +36,8 @@ int main() {
 		ChIO::readTextFile("res/glsl/shader.frag").c_str()
 	);
 
+	unsigned texture = ChGraphics::loadTexture(image.getWidth(), image.getHeight(), image.getPixels());
+
 	glUseProgram(shader);
 
 	while (!window.shouldClose()) {
@@ -48,6 +51,7 @@ int main() {
 
 	ChGraphics::deleteModel(&model);
 	glDeleteProgram(shader);
+	glDeleteTextures(1, &texture);
 
 	return 0;
 }

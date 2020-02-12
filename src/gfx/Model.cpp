@@ -28,7 +28,7 @@ void ChGraphics::storeModel(ChGraphics::Model* model) {
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, false, 8 * sizeof(float), 0);
 	glVertexAttribPointer(1, 3, GL_FLOAT, false, 8 * sizeof(float), (const void*)12);
-	glVertexAttribPointer(2, 2, GL_FLOAT, false, 8 * sizeof(float), (const void*)8);
+	glVertexAttribPointer(2, 2, GL_FLOAT, false, 8 * sizeof(float), (const void*)24);
 }
 
 void ChGraphics::deleteModel(ChGraphics::Model* model) {

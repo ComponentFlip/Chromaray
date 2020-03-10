@@ -16,14 +16,16 @@
 #include "gfx/Model.hpp"
 #include "gfx/Texture.hpp"
 
-// Temporary definitions
-#define FOV glm::radians(ChConstants::VIEW_FOV)
-#define ASPECT_RATIO (window.getWidth() * 1.0f) / (window.getHeight() * 1.0f)
+#include "Player.hpp"
+
+#define GET_FOV(width, height) glm::perspective(ChConstants::VIEW_FOV, (width * 1.0f) / (height * 1.0f), ChConstants::VIEW_NEARPLANE, ChConstants::VIEW_FARPLANE)
 
 int main() {
-	Window window(ChConstants::WINDOW_WIDTH, ChConstants::WINDOW_HEIGHT, ChConstants::WINDOW_TITLE);
+	ChCore::createWindow({ChConstants::WINDOW_WIDTH, ChConstants::WINDOW_HEIGHT, ChConstants::WINDOW_TITLE});
 	ChGraphics::Model model;
 	ChIO::Image image("res/tex/test.png");
+
+	Player player;
 
 	ChUtil::Transform objectTransform;
 	ChUtil::Transform camera;
@@ -60,32 +62,42 @@ int main() {
 	// Temporary timing code
 	auto lastTime = std::chrono::high_resolution_clock::now();
 	
-	while (!window.shouldClose()) {
+	do {
 		auto now = std::chrono::high_resolution_clock::now();
 		float delta = std::chrono::duration_cast<std::chrono::duration<float>>(now - lastTime).count();
 
-		camera.position = glm::vec3(0, 0, sin(delta) + 2);
-		objectTransform.rotation = glm::vec3(0, sin(delta*2) * 60, 0);
-
-		glViewport(0, 0, window.getWidth(), window.getHeight());
-		glClear(GL_COLOR_BUFFER_BIT);
+		player.update(camera);
 		
-		projectionMatrix = glm::perspective(FOV, ASPECT_RATIO, ChConstants::VIEW_NEARPLANE, ChConstants::VIEW_FARPLANE);
+		// Get window properties for use later.
+		ChCore::WindowProperties* prop = new ChCore::WindowProperties();
+		*prop = ChCore::getWindowProperties();
+
+		// Prepare OpenGL for rendering a frame.
+		glViewport(0, 0, prop->width, prop->height);
+		glClear(GL_COLOR_BUFFER_BIT);
+
+		// Set the matrices.
+		projectionMatrix = GET_FOV(prop->width, prop->height);
 		transformMatrix = ChUtil::createTransformMatrix(objectTransform);
 		viewMatrix = ChUtil::createViewMatrix(camera);
 
-		glUniformMatrix4fv(glGetUniformLocation(shader, "u_pMatrix"), 1, false, (const float*)&projectionMatrix[0][0]);
-		glUniformMatrix4fv(glGetUniformLocation(shader, "u_vMatrix"), 1, false, (const float*)&viewMatrix[0][0]);
-		glUniformMatrix4fv(glGetUniformLocation(shader, "u_tMatrix"), 1, false, (const float*)&transformMatrix[0][0]);
-
+		// Store matrices into the shader.
+		ChGraphics::storeMatrix(shader, projectionMatrix, "u_pMatrix");
+		ChGraphics::storeMatrix(shader, viewMatrix, "u_vMatrix");
+		ChGraphics::storeMatrix(shader, transformMatrix, "u_tMatrix");
+		
+		// Draws the quad.
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 
-		window.update();
-	}
+		delete prop;
 
-	ChGraphics::deleteModel(&model);
+	} while (ChCore::updateWindow()); // Game loop will exit if the window should close
+
 	glDeleteProgram(shader);
 	glDeleteTextures(1, &texture);
+
+	ChGraphics::deleteModel(&model);
+	ChCore::destroyWindow();
 
 	return 0;
 }

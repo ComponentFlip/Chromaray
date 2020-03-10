@@ -3,17 +3,20 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-class Window {
-public:
-	Window(int width, int height, const char* title);
-	~Window();
+namespace ChCore {
+	// Defines information about the window size and title.
+	struct WindowProperties {
+		int width, height;
+		const char* title;
+	};
 
-	int getWidth();
-	int getHeight();
+	void createWindow(WindowProperties properties);
+	void destroyWindow();
 
-	void update();
-	bool shouldClose();
-private:
-	GLFWwindow* m_Window;
-	int m_Width, m_Height;
-};
+	bool keyDown(int keyCode);
+
+	WindowProperties getWindowProperties();
+
+	// Returns false if the window should be closed.
+	bool updateWindow();
+}

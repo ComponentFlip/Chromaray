@@ -2,46 +2,55 @@
 
 #include <iostream>
 
-Window::Window(int width, int height, const char* title) : m_Width(width), m_Height(height) {
-	if (!glfwInit())
-		std::cerr << "Could not initialize GLFW!\n";
+static GLFWwindow* window;
+static const char* title;
 
-	m_Window = glfwCreateWindow(width, height, title, nullptr, nullptr);
+namespace ChCore {
+	void createWindow(WindowProperties properties) {
+		if (!glfwInit())
+			std::cerr << "Could not initialize GLFW!\n";
 
-	if (!m_Window)
-		std::cerr << "Could not create a GLFW window!\n";
+		// There is no way to get the window title out from GLFW so it has to be stored separately.
+		title = properties.title;
+		window = glfwCreateWindow(properties.width, properties.height, properties.title, nullptr, nullptr);
 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+		if (!window)
+			std::cerr << "Could not create a GLFW window!\n";
 
-	// Set the OpenGL context to this window
-	glfwMakeContextCurrent(m_Window);
+		// Sets the OpenGL version to 3.2
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 
-	if (glewInit() != GLEW_OK)
-		std::cerr << "Could not initialize GLEW!\n";
-}
+		// Set the OpenGL context to this window
+		glfwMakeContextCurrent(window);
 
-Window::~Window() {
-	glfwDestroyWindow(m_Window);
-	glfwTerminate();
-}
+		if (glewInit() != GLEW_OK)
+			std::cerr << "Could not initialize GLEW!\n";
+	}
 
-int Window::getWidth() {
-	return m_Width;
-}
+	void destroyWindow() {
+		glfwDestroyWindow(window);
+		glfwTerminate();
+	}
 
-int Window::getHeight() {
-	return m_Height;
-}
+	WindowProperties getWindowProperties() {
+		WindowProperties properties;
 
-void Window::update() {
-	glfwSwapBuffers(m_Window);
-	glfwPollEvents();
+		// Get the window size.
+		glfwGetFramebufferSize(window, &properties.width, &properties.height);
+		properties.title = title;
 
-	// Update the width and height
-	glfwGetFramebufferSize(m_Window, &m_Width, &m_Height);
-}
+		return properties;
+	}
+	
+	bool keyDown(int keyCode) {
+		return glfwGetKey(window, keyCode);
+	}
 
-bool Window::shouldClose() {
-	return glfwWindowShouldClose(m_Window);
+	bool updateWindow() {
+		glfwSwapBuffers(window);
+		glfwPollEvents();
+
+		return !glfwWindowShouldClose(window);
+	}
 }
